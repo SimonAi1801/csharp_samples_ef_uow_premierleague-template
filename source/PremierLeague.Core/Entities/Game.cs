@@ -22,7 +22,12 @@ namespace PremierLeague.Core.Entities
         public int HomeGoals { get; set; }
         public int GuestGoals { get; set; }
 
-
+        public override string ToString()
+        {
+            return $"{nameof(Round)}: {Round}, {nameof(HomeTeam)}: {HomeTeam}, " +
+                $"{nameof(GuestTeam)}: {GuestTeam}, {nameof(HomeGoals)}: {HomeGoals}, " +
+                $"{nameof(GuestGoals)}: {GuestGoals}";
+        }
     }
 }
 

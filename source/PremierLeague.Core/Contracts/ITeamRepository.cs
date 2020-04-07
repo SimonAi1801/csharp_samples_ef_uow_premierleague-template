@@ -16,5 +16,6 @@ namespace PremierLeague.Core.Contracts
         (Team Team, int Goals) GetTeamWihMostHomeGoals();
         (Team Team, int Ratio) GetTeamsWithHighestGoalRatio();
         IEnumerable<TeamStatisticDto> GetTeamStats();
+        IEnumerable<TeamTableRowDto> GetTeamRanking();
     }
 }

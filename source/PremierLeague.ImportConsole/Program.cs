@@ -110,8 +110,12 @@ namespace PremierLeague.ImportConsole
                     .Configure(o => o.NumberAlignment = Alignment.Right)
                     .ToStringAlternative());
 
-                //var teamTable = uow.Teams
-                
+                var teamTable = uow.Teams.GetTeamRanking();
+
+                PrintResult("Team Tabelle (sortiert nach Rang):", ConsoleTable
+                    .From(teamTable)
+                    .Configure(o => o.NumberAlignment = Alignment.Right)
+                    .ToStringAlternative());
             }
         }
 

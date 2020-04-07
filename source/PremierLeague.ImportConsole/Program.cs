@@ -1,4 +1,5 @@
-﻿using PremierLeague.Core;
+﻿using ConsoleTables;
+using PremierLeague.Core;
 using PremierLeague.Core.Contracts;
 using PremierLeague.Core.Entities;
 using PremierLeague.Persistence;
@@ -88,7 +89,30 @@ namespace PremierLeague.ImportConsole
 
         private static void AnalyzeData()
         {
-            throw new NotImplementedException();
+            using(IUnitOfWork uow = new UnitOfWork()) 
+            {
+                var teamWithMostGoals = uow.Teams.GetTeamWithMostGoals();
+                PrintResult("Team mit den meisten geschossenen Toren:", $"{teamWithMostGoals.Team.Name}: {teamWithMostGoals.Goals} Tore");
+
+                var teamWithMostAwayGoal = uow.Teams.GetTeamWithMostAwayGoals();
+                PrintResult("Team mit den meisten geschossenen Auswärtstoren:", $"{teamWithMostAwayGoal.Team.Name}: {teamWithMostAwayGoal.Goals} Auswärtstore");
+
+                var teamWithMostHomeGoals = uow.Teams.GetTeamWihMostHomeGoals();
+                PrintResult("Team mit den meisten geschossenen Heimtoren", $"{teamWithMostHomeGoals.Team.Name}: {teamWithMostHomeGoals.Goals} Heimtore");
+
+                var teamWithHighestGoalRatio = uow.Teams.GetTeamsWithHighestGoalRatio();
+                PrintResult("Team mit dem besten Torverhältnis:", $"{teamWithHighestGoalRatio.Team.Name}: {teamWithHighestGoalRatio.Ratio} Torverhältnis");
+
+                var teamStatic = uow.Teams.GetTeamStats();
+
+                PrintResult("Team Leistung im Durchschnitt (sotiert nach durchsn. geschossene Tore pro Spiel [absteig.]):", ConsoleTable
+                    .From(teamStatic)
+                    .Configure(o => o.NumberAlignment = Alignment.Right)
+                    .ToStringAlternative());
+
+                //var teamTable = uow.Teams
+                
+            }
         }
 
         /// <summary>
